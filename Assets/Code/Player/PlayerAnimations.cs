@@ -25,10 +25,13 @@ public class PlayerAnimations : MonoBehaviour
     private Dictionary<ItemCategory, AnimationLayer> _animationsCategory = new();
     private Animations _currentAnimation;
     private readonly KeyLoop _keyLoop = new();
+    private bool _isFacingLeft;
 
     void Awake()
     {
         SetupSpriteRenderers();
+        SetAnimation(Animations.Idle);
+        StartCoroutine(PlayAnimation());
     }
 
     private void SetupSpriteRenderers()
@@ -39,8 +42,6 @@ public class PlayerAnimations : MonoBehaviour
             AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().empty.spriteSheet, 1));
         _animationsCategory.Add(ItemCategory.Body,
             AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().empty.spriteSheet, 1));
-        SetAnimation(Animations.Idle);
-        StartCoroutine(PlayAnimation());
     }
 
     private void SetSpriteSheet(ItemCategory category, GearSet gearSet)
@@ -66,13 +67,16 @@ public class PlayerAnimations : MonoBehaviour
 
     private void SetWalkingHorizontal(bool left)
     {
+        if (left != _isFacingLeft)
+        {
+            _isFacingLeft = left;
+            foreach (KeyValuePair<ItemCategory, AnimationLayer> layer in _animationsCategory)
+            {
+                layer.Value.Flip(left);
+            }
+        }
         if (_currentAnimation == Animations.Walk) return;
         SetAnimation(Animations.Walk);
-
-        foreach (KeyValuePair<ItemCategory, AnimationLayer> layer in _animationsCategory)
-        {
-            layer.Value.Flip(left);
-        }
     }
 
     private void SetWalkingVertical(bool down)

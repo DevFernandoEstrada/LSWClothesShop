@@ -15,9 +15,10 @@ GameObject:
   - component: {fileID: 6149798562814769562}
   - component: {fileID: 4736991761892800247}
   - component: {fileID: 6393001366651665877}
+  - component: {fileID: 1187986426}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,6 +99,8 @@ MonoBehaviour:
   gearSets:
   - {fileID: 11400000, guid: e1d9c81ad5a01e0459545c59b370ec2a, type: 2}
   - {fileID: 11400000, guid: 3d6496e2d4aeb304b94da6cf0b018825, type: 2}
+  - {fileID: 11400000, guid: 43097ea054e1a6d48879751d2f000e32, type: 2}
+  - {fileID: 11400000, guid: 9a2852fd51e5aa54e8d895a0c0925e99, type: 2}
 --- !u!114 &4736991761892800247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,3 +126,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationFPS: 12
+--- !u!50 &1187986426
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930435936209479037}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

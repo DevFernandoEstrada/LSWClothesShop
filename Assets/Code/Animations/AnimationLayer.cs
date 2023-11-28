@@ -8,6 +8,7 @@ public class AnimationLayer
     private AnimationLayer(Transform source, Sprite[] spriteSheet, int layer)
     {
         GameObject spriteRendererChild = new();
+        spriteRendererChild.name = "Animation Layer";
         spriteRendererChild.transform.SetParent(source);
         _renderer = spriteRendererChild.AddComponent<SpriteRenderer>();
         _renderer.sortingOrder = layer;
