@@ -18,7 +18,7 @@ MonoBehaviour:
   value: 80
   category: 1
   rarity: 1
-  icon: {fileID: 0}
+  icon: {fileID: -2006071373, guid: 3f1be4e4091af8f47a5c710b9c80d30c, type: 3}
   isSaleable: 1
   stats:
     health: 10

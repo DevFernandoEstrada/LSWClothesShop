@@ -96,11 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basic: {fileID: 11400000, guid: e30b7371682eb8146816791c6a161109, type: 2}
   empty: {fileID: 11400000, guid: 9d6b6052d357f84448bbe7cb0abb82e4, type: 2}
-  gearSets:
-  - {fileID: 11400000, guid: e1d9c81ad5a01e0459545c59b370ec2a, type: 2}
-  - {fileID: 11400000, guid: 3d6496e2d4aeb304b94da6cf0b018825, type: 2}
-  - {fileID: 11400000, guid: 43097ea054e1a6d48879751d2f000e32, type: 2}
-  - {fileID: 11400000, guid: 9a2852fd51e5aa54e8d895a0c0925e99, type: 2}
+  gearSets: []
 --- !u!114 &4736991761892800247
 MonoBehaviour:
   m_ObjectHideFlags: 0

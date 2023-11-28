@@ -8,6 +8,9 @@ public class PlayerMovement : MonoBehaviour
     public static event Action<bool> OnWalkingHorizontal;
     public static event Action<bool> OnWalkingVertical;
 
+    private delegate void MovementStatus();
+    private MovementStatus _movementStatus;
+    
     private PlayerStats _stats;
     private Rigidbody2D _rigidbody2D;
 
@@ -19,16 +22,7 @@ public class PlayerMovement : MonoBehaviour
         _stats = GetComponent<Player>().stats;
         _rigidbody2D = GetComponent<Rigidbody2D>();
         CreateCollider();
-    }
-
-    private void CreateCollider()
-    {
-        GameObject movement = new();
-        movement.name = "Physics Collider";
-        movement.transform.SetParent(transform);
-        CapsuleCollider2D capsuleCollider2D = movement.AddComponent<CapsuleCollider2D>();
-        capsuleCollider2D.offset = new Vector2(0, 0.02f);
-        capsuleCollider2D.size = new Vector2(0.15f, 0.3f);
+        _movementStatus = MovePlayer;
     }
 
     private void Update()
@@ -39,14 +33,30 @@ public class PlayerMovement : MonoBehaviour
     
     private void FixedUpdate()
     {
-        MovePlayer();
+        _movementStatus();
     }
+
+    public void EnableMovement(bool enable)
+    {
+        _movementStatus = enable ? MovePlayer : StandBy;
+    }
+    
+    private void CreateCollider()
+    {
+        GameObject movement = new();
+        movement.name = "Physics Collider";
+        movement.transform.SetParent(transform);
+        CapsuleCollider2D capsuleCollider2D = movement.AddComponent<CapsuleCollider2D>();
+        capsuleCollider2D.offset = new Vector2(0, 0.02f);
+        capsuleCollider2D.size = new Vector2(0.15f, 0.3f);
+    }
+    
+    private void StandBy(){}
 
     private void MovePlayer()
     {
         if (_horizontalInput == 0f && _verticalInput == 0f)
         {
-            _rigidbody2D.velocity = Vector2.zero;
             OnIdle?.Invoke();
             return;
         }

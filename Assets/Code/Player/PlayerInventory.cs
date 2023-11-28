@@ -25,26 +25,34 @@ public class PlayerInventory : MonoBehaviour
         ChangeGearSet(ItemCategory.Base, basic);
     }
 
+    public void AddGearSet(GearSet newGearSet)
+    {
+        gearSets.Add(newGearSet);
+    }
+    
+    public void RemoveGearSet(GearSet removeGearSet)
+    {
+        if (removeGearSet == _equippedGear[removeGearSet.category])
+        {
+            ChangeGearSet(removeGearSet.category, empty);
+        }
+        gearSets.Remove(removeGearSet);
+    }
+
+    private int _currentGear;
+    
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (!Input.GetKeyDown(KeyCode.E)) return;
+        _currentGear++;
+        if (_currentGear >= gearSets.Count)
         {
-            ChangeGearSet(gearSets[0].category, gearSets[0]);
+            _currentGear = 0;
         }
-        
-        if (Input.GetKeyDown(KeyCode.R))
+
+        if (gearSets.Count > 0)
         {
-            ChangeGearSet(gearSets[1].category, gearSets[1]);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            ChangeGearSet(gearSets[2].category, gearSets[2]);
-        }
-        
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            ChangeGearSet(gearSets[3].category, gearSets[3]);
+            ChangeGearSet(gearSets[_currentGear].category, gearSets[_currentGear]);
         }
     }
 
