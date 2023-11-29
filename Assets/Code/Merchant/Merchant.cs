@@ -6,6 +6,7 @@ public class Merchant : MonoBehaviour, IInteractable
 {
     [SerializeField, Range(0.1f, 0.5f)] private float overPricePercent = 0.1f;
     [SerializeField] private List<GearSet> gearSets = new();
+    [SerializeField] private string shopName;
 
     private MerchantView _view;
 
@@ -50,7 +51,7 @@ public class Merchant : MonoBehaviour, IInteractable
     public void OpenStore()
     {
         UIItemsData uiItemsData;
-        uiItemsData.header = "Shop";
+        uiItemsData.header = shopName;
         uiItemsData.leftPanel = "Buy";
         uiItemsData.rightPanel = "Sell";
         uiItemsData.leftGearSet = gearSets;
