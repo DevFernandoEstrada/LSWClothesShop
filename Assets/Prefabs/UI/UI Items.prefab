@@ -258,6 +258,7 @@ MonoBehaviour:
   - {fileID: 5393987153878851595}
   - {fileID: 9115941874546499488}
   leftButtonPanel: {fileID: 4528625427732147841}
+  closePanel: {fileID: 1370825900216259963}
   leftPanelItemsPlace: {fileID: 3491054286551475396}
   rightPanelItemsPlace: {fileID: 402740682208758494}
   uiItemPrefab: {fileID: -2722353146358757401, guid: 2932c7705be40a44294634609eee9f10, type: 3}
@@ -1730,19 +1731,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6623959839402418351}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6709494527838771087}
-        m_TargetAssemblyTypeName: UIItems, Assembly-CSharp
-        m_MethodName: CloseUIItems
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6977449087381531021
 MonoBehaviour:
   m_ObjectHideFlags: 0

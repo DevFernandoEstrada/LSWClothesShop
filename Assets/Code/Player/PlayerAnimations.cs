@@ -39,9 +39,9 @@ public class PlayerAnimations : MonoBehaviour
         _animationsCategory.Add(ItemCategory.Base,
             AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().basic.spriteSheet, 0));
         _animationsCategory.Add(ItemCategory.Head,
-            AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().empty.spriteSheet, 1));
+            AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().emptyBody.spriteSheet, 1));
         _animationsCategory.Add(ItemCategory.Body,
-            AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().empty.spriteSheet, 1));
+            AnimationLayer.CreateInstance(transform, GetComponent<PlayerInventory>().emptyBody.spriteSheet, 1));
     }
 
     private void SetSpriteSheet(ItemCategory category, GearSet gearSet)

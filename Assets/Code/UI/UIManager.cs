@@ -8,6 +8,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private UIItems uiItemsPrefab;
     private UIItems _uiItemsInstance;
 
+    [SerializeField] private GameObject uIDashboard;
+
     private void Awake()
     {
         Instance = this;
@@ -23,11 +25,13 @@ public class UIManager : MonoBehaviour
     public void ShowItems(UIItemsData uiItemsData)
     {
         _uiItemsInstance.EnableUIItems(uiItemsData);
+        uIDashboard.SetActive(false);
     }
 
     public void HideItems()
     {
-        _uiItemsInstance.gameObject.SetActive(false);
+        _uiItemsInstance.CloseUIItems();
+        uIDashboard.SetActive(true);
     }
 
     public void RefreshItems()

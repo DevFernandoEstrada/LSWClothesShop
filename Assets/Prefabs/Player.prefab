@@ -95,7 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basic: {fileID: 11400000, guid: e30b7371682eb8146816791c6a161109, type: 2}
-  empty: {fileID: 11400000, guid: 9d6b6052d357f84448bbe7cb0abb82e4, type: 2}
+  emptyBody: {fileID: 11400000, guid: bde33ff7033efd4498b17f260b754d80, type: 2}
+  emptyHead: {fileID: 11400000, guid: 9d6b6052d357f84448bbe7cb0abb82e4, type: 2}
   gearSets: []
 --- !u!114 &4736991761892800247
 MonoBehaviour:

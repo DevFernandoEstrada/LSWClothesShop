@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
     public static event Action<ItemCategory, GearSet> OnGearSetChanged;
 
-    public GearSet basic, empty;
+    public GearSet basic, emptyBody, emptyHead;
 
     public List<GearSet> gearSets;
     private readonly Dictionary<ItemCategory, GearSet> _equippedGear = new();
@@ -18,11 +19,11 @@ public class PlayerInventory : MonoBehaviour
 
     private void SetupGear()
     {
-        _equippedGear.Add(ItemCategory.Base, empty);
-        _equippedGear.Add(ItemCategory.Head, empty);
-        _equippedGear.Add(ItemCategory.Body, empty);
+        _equippedGear.Add(ItemCategory.Base, emptyBody);
+        _equippedGear.Add(ItemCategory.Head, emptyBody);
+        _equippedGear.Add(ItemCategory.Body, emptyBody);
 
-        ChangeGearSet(ItemCategory.Base, basic);
+        ChangeGearSet(basic);
     }
 
     public void AddGearSet(GearSet newGearSet)
@@ -34,32 +35,16 @@ public class PlayerInventory : MonoBehaviour
     {
         if (removeGearSet == _equippedGear[removeGearSet.category])
         {
-            ChangeGearSet(removeGearSet.category, empty);
+            ChangeGearSet(removeGearSet.category == ItemCategory.Body ? emptyBody : emptyHead);
         }
         gearSets.Remove(removeGearSet);
     }
 
-    private int _currentGear;
-    
-    private void Update()
+    private void ChangeGearSet(GearSet gearSet)
     {
-        if (!Input.GetKeyDown(KeyCode.E)) return;
-        _currentGear++;
-        if (_currentGear >= gearSets.Count)
-        {
-            _currentGear = 0;
-        }
-
-        if (gearSets.Count > 0)
-        {
-            ChangeGearSet(gearSets[_currentGear].category, gearSets[_currentGear]);
-        }
-    }
-
-    private void ChangeGearSet(ItemCategory category, GearSet gearSet)
-    {
-        _equippedGear[category] = gearSet;
-        OnGearSetChanged?.Invoke(category, gearSet);
+        _equippedGear[gearSet.category] = gearSet;
+        OnGearSetChanged?.Invoke(gearSet.category, gearSet);
+        UIManager.Instance.HideItems();
     }
 
     public Stats GetEquippedStats()
@@ -71,5 +56,20 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return currentStats;
+    }
+    
+    public void OpenInventory()
+    {
+        UIItemsData uiItemsData;
+        uiItemsData.header = "Inventory";
+        uiItemsData.leftPanel = "Body";
+        uiItemsData.rightPanel = "Head";
+        uiItemsData.leftGearSet = gearSets.Where(gearSet => gearSet.category == ItemCategory.Body).ToList();
+        uiItemsData.rightGearSet = gearSets.Where(gearSet => gearSet.category == ItemCategory.Head).ToList();
+        uiItemsData.leftCallback = ChangeGearSet;
+        uiItemsData.rightCallback = ChangeGearSet;
+        
+        UIManager.Instance.ShowItems(uiItemsData);
+        Player.Instance.movement.EnableMovement(false);
     }
 }

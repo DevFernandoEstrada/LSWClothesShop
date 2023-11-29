@@ -10,17 +10,23 @@ public class UIItems : MonoBehaviour
     [SerializeField] private TMP_Text[] txtLeftPanel;
     [SerializeField] private TMP_Text[] txtRightPanel;
     [SerializeField] private Button leftButtonPanel;
+    [SerializeField] private Button closePanel;
     [SerializeField] private Transform leftPanelItemsPlace, rightPanelItemsPlace;
     [SerializeField] private UIItem uiItemPrefab;
 
     private UIItemsData _currentData;
+
+    private void Start()
+    {
+        closePanel.onClick.AddListener(() => UIManager.Instance.HideItems());
+    }
 
     public void CloseUIItems()
     {
         leftButtonPanel.onClick.Invoke();
         DestroyAllItems();
         Player.Instance.movement.EnableMovement(true);
-        UIManager.Instance.HideItems();
+        gameObject.SetActive(false);
     }
 
     public void Refresh()
@@ -47,14 +53,14 @@ public class UIItems : MonoBehaviour
             Instantiate(uiItemPrefab, place).SetupItem(gearSet, callback);
         }
     }
-    
+
     private void DestroyAllItems()
     {
         foreach (Transform item in leftPanelItemsPlace.transform)
         {
             Destroy(item.gameObject);
         }
-        
+
         foreach (Transform item in rightPanelItemsPlace.transform)
         {
             Destroy(item.gameObject);
