@@ -49,7 +49,7 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 1
+  spriteGenerateFallbackPhysicsShape: 0
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -1492,9 +1492,9 @@ TextureImporter:
       char_a_p1_1out_undi_v01_62: 722751919
       char_a_p1_1out_undi_v01_37: 834307050
       char_a_p1_1out_undi_v01_27: -1939962598
-      char_a_p1_1out_undi_v01_29: 2022754511
       char_a_p1_1out_undi_v01_39: -61895875
       char_a_p1_1out_undi_v01_32: -198181779
+      char_a_p1_1out_undi_v01_29: 2022754511
       char_a_p1_1out_undi_v01_52: -727309496
       char_a_p1_1out_undi_v01_5: 2081488325
       char_a_p1_1out_undi_v01_7: 1250329760

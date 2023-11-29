@@ -24,7 +24,6 @@ public class GearSet : ScriptableObject
     public ItemCategory category;
     public ItemRarity rarity;
     public Sprite icon;
-    public bool isSaleable;
     public Stats stats;
     public Sprite[] spriteSheet;
 }
