@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 1
   gearName: Underwear
-  description: 
+  description: Do you prefer going comando?
   value: 10
   category: 2
   rarity: 0

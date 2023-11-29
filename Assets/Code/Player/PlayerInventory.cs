@@ -39,12 +39,26 @@ public class PlayerInventory : MonoBehaviour
         }
         gearSets.Remove(removeGearSet);
     }
+    
+    private void ConfirmChangeGearSet(GearSet gearSet)
+    {
+        if (gearSet == _equippedGear[gearSet.category])
+        {
+            UIManager.Instance.ShowItemDescription(gearSet, gearSet.value.ToString(), "Remove", ChangeGearSet);
+            return;
+        }
+        UIManager.Instance.ShowItemDescription(gearSet, gearSet.value.ToString(), "Equip", ChangeGearSet);
+    }
 
     private void ChangeGearSet(GearSet gearSet)
     {
+        if (gearSet == _equippedGear[gearSet.category])
+        {
+            ChangeGearSet(gearSet.category == ItemCategory.Body ? emptyBody : emptyHead);
+            return;
+        }
         _equippedGear[gearSet.category] = gearSet;
         OnGearSetChanged?.Invoke(gearSet.category, gearSet);
-        UIManager.Instance.HideItems();
     }
 
     public Stats GetEquippedStats()
@@ -66,8 +80,8 @@ public class PlayerInventory : MonoBehaviour
         uiItemsData.rightPanel = "Head";
         uiItemsData.leftGearSet = gearSets.Where(gearSet => gearSet.category == ItemCategory.Body).ToList();
         uiItemsData.rightGearSet = gearSets.Where(gearSet => gearSet.category == ItemCategory.Head).ToList();
-        uiItemsData.leftCallback = ChangeGearSet;
-        uiItemsData.rightCallback = ChangeGearSet;
+        uiItemsData.leftCallback = ConfirmChangeGearSet;
+        uiItemsData.rightCallback = ConfirmChangeGearSet;
         
         UIManager.Instance.ShowItems(uiItemsData);
         Player.Instance.movement.EnableMovement(false);

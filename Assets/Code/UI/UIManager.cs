@@ -1,10 +1,11 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [SerializeField] private UIItemDescription uiItemDescriptionPrefab;
     [SerializeField] private UIItems uiItemsPrefab;
     private UIItems _uiItemsInstance;
 
@@ -37,5 +38,10 @@ public class UIManager : MonoBehaviour
     public void RefreshItems()
     {
         _uiItemsInstance.Refresh();
+    }
+
+    public void ShowItemDescription(GearSet gearSet, string overrideValue, string actionButtonText, Action<GearSet> callback = null)
+    {
+        Instantiate(uiItemDescriptionPrefab).Setup(gearSet, overrideValue, actionButtonText, callback);
     }
 }

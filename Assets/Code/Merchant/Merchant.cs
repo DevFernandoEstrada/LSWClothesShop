@@ -14,14 +14,31 @@ public class Merchant : MonoBehaviour, IInteractable
         _view = GetComponent<MerchantView>();
     }
 
+    private void ConfirmSellGearSet(GearSet gearSet)
+    {
+        int merchantValue = Mathf.FloorToInt(gearSet.value * (1 + overPricePercent));
+        if (Player.Instance.wallet.GetCurrentBalance() > merchantValue)
+        {
+            UIManager.Instance.ShowItemDescription(gearSet, merchantValue.ToString(), "Buy", SellGearSet);
+            return;
+        }
+        UIManager.Instance.ShowItemDescription(gearSet, merchantValue.ToString(), "Close");
+    }
+    
     private void SellGearSet(GearSet gearSet)
     {
-        if (!Player.Instance.wallet.WithdrawMoney(Mathf.FloorToInt(gearSet.value * (1 + overPricePercent)))) return;
+        int merchantValue = Mathf.FloorToInt(gearSet.value * (1 + overPricePercent));
+        Player.Instance.wallet.WithdrawMoney(merchantValue);
         Player.Instance.inventory.AddGearSet(gearSet);
         gearSets.Remove(gearSet);
         UIManager.Instance.RefreshItems();
     }
 
+    private void ConfirmBuyGearSet(GearSet gearSet)
+    {
+        UIManager.Instance.ShowItemDescription(gearSet, gearSet.value.ToString(), "Sell", BuyGearSet);
+    }
+    
     private void BuyGearSet(GearSet gearSet)
     {
         Player.Instance.wallet.DepositMoney(gearSet.value);
@@ -38,8 +55,8 @@ public class Merchant : MonoBehaviour, IInteractable
         uiItemsData.rightPanel = "Sell";
         uiItemsData.leftGearSet = gearSets;
         uiItemsData.rightGearSet = Player.Instance.inventory.gearSets;
-        uiItemsData.leftCallback = SellGearSet;
-        uiItemsData.rightCallback = BuyGearSet;
+        uiItemsData.leftCallback = ConfirmSellGearSet;
+        uiItemsData.rightCallback = ConfirmBuyGearSet;
         
         UIManager.Instance.ShowItems(uiItemsData);
         Player.Instance.movement.EnableMovement(false);

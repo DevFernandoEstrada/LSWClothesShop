@@ -705,5 +705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 717a17cb66763904298cdae3140636cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiItemDescriptionPrefab: {fileID: 3988986402731293344, guid: a9951cd9c08e5384699c56f49441fade, type: 3}
   uiItemsPrefab: {fileID: 6709494527838771087, guid: 235bf8ff8a1248644bb350ef8176dbd1, type: 3}
   uIDashboard: {fileID: 1259328098}
