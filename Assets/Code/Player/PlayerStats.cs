@@ -1,8 +1,11 @@
+using System;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
     public Stats currentStats;
+
+    public static event Action OnStatsUpdated; 
 
     private void OnEnable()
     {
@@ -17,5 +20,6 @@ public class PlayerStats : MonoBehaviour
     private void UpdateStats(ItemCategory category, GearSet gearSet)
     {
         currentStats = GetComponent<PlayerInventory>().GetEquippedStats();
+        OnStatsUpdated?.Invoke();
     }
 }

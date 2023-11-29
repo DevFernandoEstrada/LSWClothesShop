@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,5 +9,10 @@ public class UIInventory : MonoBehaviour
     private void Start()
     {
         inventoryButton.onClick.AddListener(() => Player.Instance.inventory.OpenInventory());
+    }
+
+    private void OnDestroy()
+    {
+        inventoryButton.onClick.RemoveAllListeners();
     }
 }

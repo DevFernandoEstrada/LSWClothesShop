@@ -21,6 +21,11 @@ public class UIItems : MonoBehaviour
         closePanel.onClick.AddListener(() => UIManager.Instance.HideItems());
     }
 
+    private void OnDestroy()
+    {
+        closePanel.onClick.RemoveAllListeners();
+    }
+
     public void CloseUIItems()
     {
         leftButtonPanel.onClick.Invoke();

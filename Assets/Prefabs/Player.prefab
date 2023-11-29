@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6149798562814769562}
   - component: {fileID: 4736991761892800247}
   - component: {fileID: 6393001366651665877}
+  - component: {fileID: 1003542384096252144}
   - component: {fileID: 1187986426}
   m_Layer: 0
   m_Name: Player
@@ -55,6 +56,7 @@ MonoBehaviour:
   inventory: {fileID: 0}
   interactions: {fileID: 0}
   animations: {fileID: 0}
+  wallet: {fileID: 0}
 --- !u!114 &3673191575306999255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +125,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationFPS: 12
+--- !u!114 &1003542384096252144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930435936209479037}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8366061166ca9f54e8121403e26ba2f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &1187986426
 Rigidbody2D:
   serializedVersion: 4

@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(PlayerInteractions))]
 [RequireComponent(typeof(PlayerAnimations))]
+[RequireComponent(typeof(PlayerWallet))]
 public abstract class BasePlayer : MonoBehaviour
 {
     [HideInInspector] public PlayerMovement movement;
@@ -12,6 +13,7 @@ public abstract class BasePlayer : MonoBehaviour
     [HideInInspector] public PlayerInventory inventory;
     [HideInInspector] public PlayerInteractions interactions;
     [HideInInspector] public PlayerAnimations animations;
+    [HideInInspector] public PlayerWallet wallet;
 
     public void Awake()
     {
@@ -20,5 +22,6 @@ public abstract class BasePlayer : MonoBehaviour
         inventory = GetComponent<PlayerInventory>();
         interactions = GetComponent<PlayerInteractions>();
         animations = GetComponent<PlayerAnimations>();
+        wallet = GetComponent<PlayerWallet>();
     }
 }

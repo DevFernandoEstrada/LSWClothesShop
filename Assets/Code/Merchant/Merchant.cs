@@ -4,7 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(MerchantView))]
 public class Merchant : MonoBehaviour, IInteractable
 {
-    [SerializeField, Range(10f, 50f)] private float overPricePercent = 10f;
+    [SerializeField, Range(0.1f, 0.5f)] private float overPricePercent = 0.1f;
     [SerializeField] private List<GearSet> gearSets = new();
 
     private MerchantView _view;
@@ -16,6 +16,7 @@ public class Merchant : MonoBehaviour, IInteractable
 
     private void SellGearSet(GearSet gearSet)
     {
+        if (!Player.Instance.wallet.WithdrawMoney(Mathf.FloorToInt(gearSet.value * (1 + overPricePercent)))) return;
         Player.Instance.inventory.AddGearSet(gearSet);
         gearSets.Remove(gearSet);
         UIManager.Instance.RefreshItems();
@@ -23,6 +24,7 @@ public class Merchant : MonoBehaviour, IInteractable
 
     private void BuyGearSet(GearSet gearSet)
     {
+        Player.Instance.wallet.DepositMoney(gearSet.value);
         Player.Instance.inventory.RemoveGearSet(gearSet);
         gearSets.Add(gearSet);
         UIManager.Instance.RefreshItems();
@@ -31,7 +33,7 @@ public class Merchant : MonoBehaviour, IInteractable
     public void OpenStore()
     {
         UIItemsData uiItemsData;
-        uiItemsData.header = "My store";
+        uiItemsData.header = "Shop";
         uiItemsData.leftPanel = "Buy";
         uiItemsData.rightPanel = "Sell";
         uiItemsData.leftGearSet = gearSets;

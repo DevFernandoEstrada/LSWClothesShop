@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d56cd1ced8e0e914bb3c50e53cf6a08a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  overPricePercent: 50
+  overPricePercent: 0.1
   gearSets:
   - {fileID: 11400000, guid: 69811c2cbec0c6445b7600a93225a854, type: 2}
   - {fileID: 11400000, guid: 43097ea054e1a6d48879751d2f000e32, type: 2}
