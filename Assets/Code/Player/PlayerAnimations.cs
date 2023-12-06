@@ -4,7 +4,9 @@ using UnityEngine;
 
 public enum Animations
 {
-    Idle,
+    IdleDown,
+    IdleUp,
+    IdleSide,
     Walk,
     WalkingDown,
     WalkingUp
@@ -16,7 +18,9 @@ public class PlayerAnimations : MonoBehaviour
 
     private readonly Dictionary<Animations, KeyLoop> _animationsData = new()
     {
-        { Animations.Idle, new KeyLoop(0, 0) },
+        { Animations.IdleDown, new KeyLoop(0, 0) },
+        { Animations.IdleUp, new KeyLoop(8, 8) },
+        { Animations.IdleSide, new KeyLoop(16, 16) },
         { Animations.Walk, new KeyLoop(48, 53) },
         { Animations.WalkingDown, new KeyLoop(32, 37) },
         { Animations.WalkingUp, new KeyLoop(40, 45) },
@@ -30,7 +34,7 @@ public class PlayerAnimations : MonoBehaviour
     void Awake()
     {
         SetupSpriteRenderers();
-        SetAnimation(Animations.Idle);
+        SetAnimation(Animations.IdleDown);
         StartCoroutine(PlayAnimation());
     }
 
@@ -97,8 +101,19 @@ public class PlayerAnimations : MonoBehaviour
 
     private void SetIdle()
     {
-        if (_currentAnimation == Animations.Idle) return;
-        SetAnimation(Animations.Idle);
+        if (_currentAnimation <= Animations.IdleSide) return;
+        switch (_currentAnimation)
+        {
+            case Animations.Walk:
+                SetAnimation(Animations.IdleSide);
+                return;
+            case Animations.WalkingUp:
+                SetAnimation(Animations.IdleUp);
+                return;
+            case Animations.WalkingDown:
+                SetAnimation(Animations.IdleDown);
+                return;
+        }
     }
 
     private void SetAnimation(Animations newAnimation)
